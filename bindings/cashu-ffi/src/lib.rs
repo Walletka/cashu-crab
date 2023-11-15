@@ -30,6 +30,7 @@ mod ffi {
     pub use crate::nuts::nut09::{MintInfo, MintVersion};
     pub use crate::types::amount::Amount;
     pub use crate::types::{Bolt11Invoice, KeySetInfo, Secret};
+    pub use url::Url;
 
     // UDL
     uniffi::include_scaffolding!("cashu");

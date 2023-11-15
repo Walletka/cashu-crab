@@ -295,6 +295,8 @@ interface Melted {
 interface Wallet {
 	// [Throws=CashuSdkError]
 	// ProofsStatus check_proofs_spent(sequence<MintProof> proofs);
+	[Throws=CashuSdkError, Name="for_mint"]
+	constructor(string mint_url);
     [Throws=CashuSdkError]
 	RequestMintResponse request_mint(Amount amount);
     [Throws=CashuSdkError]

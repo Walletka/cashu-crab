@@ -22,6 +22,7 @@ import com.sun.jna.IntegerType
 import com.sun.jna.Native
 import com.sun.jna.Pointer
 import com.sun.jna.Structure
+import com.sun.jna.Callback
 import com.sun.jna.ptr.*
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -687,31 +688,9 @@ internal interface _UniFFILib : Library {
     ): Byte
     fun uniffi_cashu_sdk_fn_method_melted_change(`ptr`: Pointer,_uniffi_out_err: RustCallStatus, 
     ): RustBuffer.ByValue
-    fun uniffi_cashu_sdk_fn_free_client(`ptr`: Pointer,_uniffi_out_err: RustCallStatus, 
-    ): Unit
-    fun uniffi_cashu_sdk_fn_constructor_client_new(`mintUrl`: RustBuffer.ByValue,_uniffi_out_err: RustCallStatus, 
-    ): Pointer
-    fun uniffi_cashu_sdk_fn_method_client_get_keys(`ptr`: Pointer,_uniffi_out_err: RustCallStatus, 
-    ): Pointer
-    fun uniffi_cashu_sdk_fn_method_client_get_keysets(`ptr`: Pointer,_uniffi_out_err: RustCallStatus, 
-    ): Pointer
-    fun uniffi_cashu_sdk_fn_method_client_request_mint(`ptr`: Pointer,`amount`: Pointer,_uniffi_out_err: RustCallStatus, 
-    ): Pointer
-    fun uniffi_cashu_sdk_fn_method_client_mint(`ptr`: Pointer,`blindedMessages`: Pointer,`hash`: RustBuffer.ByValue,_uniffi_out_err: RustCallStatus, 
-    ): Pointer
-    fun uniffi_cashu_sdk_fn_method_client_check_fees(`ptr`: Pointer,`invoice`: Pointer,_uniffi_out_err: RustCallStatus, 
-    ): Pointer
-    fun uniffi_cashu_sdk_fn_method_client_melt(`ptr`: Pointer,`proofs`: RustBuffer.ByValue,`invoice`: Pointer,`outputs`: RustBuffer.ByValue,_uniffi_out_err: RustCallStatus, 
-    ): Pointer
-    fun uniffi_cashu_sdk_fn_method_client_split(`ptr`: Pointer,`splitRequest`: Pointer,_uniffi_out_err: RustCallStatus, 
-    ): Pointer
-    fun uniffi_cashu_sdk_fn_method_client_check_spendable(`ptr`: Pointer,`proofs`: RustBuffer.ByValue,_uniffi_out_err: RustCallStatus, 
-    ): Pointer
-    fun uniffi_cashu_sdk_fn_method_client_get_info(`ptr`: Pointer,_uniffi_out_err: RustCallStatus, 
-    ): Pointer
     fun uniffi_cashu_sdk_fn_free_wallet(`ptr`: Pointer,_uniffi_out_err: RustCallStatus, 
     ): Unit
-    fun uniffi_cashu_sdk_fn_constructor_wallet_new(`client`: Pointer,`mintKeys`: Pointer,_uniffi_out_err: RustCallStatus, 
+    fun uniffi_cashu_sdk_fn_constructor_wallet_for_mint(`mintUrl`: RustBuffer.ByValue,_uniffi_out_err: RustCallStatus, 
     ): Pointer
     fun uniffi_cashu_sdk_fn_method_wallet_request_mint(`ptr`: Pointer,`amount`: Pointer,_uniffi_out_err: RustCallStatus, 
     ): Pointer
@@ -923,24 +902,6 @@ internal interface _UniFFILib : Library {
     ): Short
     fun uniffi_cashu_sdk_checksum_method_melted_change(
     ): Short
-    fun uniffi_cashu_sdk_checksum_method_client_get_keys(
-    ): Short
-    fun uniffi_cashu_sdk_checksum_method_client_get_keysets(
-    ): Short
-    fun uniffi_cashu_sdk_checksum_method_client_request_mint(
-    ): Short
-    fun uniffi_cashu_sdk_checksum_method_client_mint(
-    ): Short
-    fun uniffi_cashu_sdk_checksum_method_client_check_fees(
-    ): Short
-    fun uniffi_cashu_sdk_checksum_method_client_melt(
-    ): Short
-    fun uniffi_cashu_sdk_checksum_method_client_split(
-    ): Short
-    fun uniffi_cashu_sdk_checksum_method_client_check_spendable(
-    ): Short
-    fun uniffi_cashu_sdk_checksum_method_client_get_info(
-    ): Short
     fun uniffi_cashu_sdk_checksum_method_wallet_request_mint(
     ): Short
     fun uniffi_cashu_sdk_checksum_method_wallet_mint_token(
@@ -1057,9 +1018,7 @@ internal interface _UniFFILib : Library {
     ): Short
     fun uniffi_cashu_sdk_checksum_constructor_melted_new(
     ): Short
-    fun uniffi_cashu_sdk_checksum_constructor_client_new(
-    ): Short
-    fun uniffi_cashu_sdk_checksum_constructor_wallet_new(
+    fun uniffi_cashu_sdk_checksum_constructor_wallet_for_mint(
     ): Short
     fun uniffi_cashu_sdk_checksum_constructor_mint_new(
     ): Short
@@ -1326,33 +1285,6 @@ private fun uniffiCheckApiChecksums(lib: _UniFFILib) {
     if (lib.uniffi_cashu_sdk_checksum_method_melted_change() != 25907.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_cashu_sdk_checksum_method_client_get_keys() != 13359.toShort()) {
-        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
-    }
-    if (lib.uniffi_cashu_sdk_checksum_method_client_get_keysets() != 16691.toShort()) {
-        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
-    }
-    if (lib.uniffi_cashu_sdk_checksum_method_client_request_mint() != 54079.toShort()) {
-        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
-    }
-    if (lib.uniffi_cashu_sdk_checksum_method_client_mint() != 33635.toShort()) {
-        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
-    }
-    if (lib.uniffi_cashu_sdk_checksum_method_client_check_fees() != 55993.toShort()) {
-        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
-    }
-    if (lib.uniffi_cashu_sdk_checksum_method_client_melt() != 42152.toShort()) {
-        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
-    }
-    if (lib.uniffi_cashu_sdk_checksum_method_client_split() != 20002.toShort()) {
-        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
-    }
-    if (lib.uniffi_cashu_sdk_checksum_method_client_check_spendable() != 57305.toShort()) {
-        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
-    }
-    if (lib.uniffi_cashu_sdk_checksum_method_client_get_info() != 35255.toShort()) {
-        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
-    }
     if (lib.uniffi_cashu_sdk_checksum_method_wallet_request_mint() != 54048.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
@@ -1527,10 +1459,7 @@ private fun uniffiCheckApiChecksums(lib: _UniFFILib) {
     if (lib.uniffi_cashu_sdk_checksum_constructor_melted_new() != 13209.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_cashu_sdk_checksum_constructor_client_new() != 53069.toShort()) {
-        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
-    }
-    if (lib.uniffi_cashu_sdk_checksum_constructor_wallet_new() != 23763.toShort()) {
+    if (lib.uniffi_cashu_sdk_checksum_constructor_wallet_for_mint() != 45603.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cashu_sdk_checksum_constructor_mint_new() != 62037.toShort()) {
@@ -2578,180 +2507,6 @@ public object FfiConverterTypeCheckSpendableResponse: FfiConverter<CheckSpendabl
     override fun allocationSize(value: CheckSpendableResponse) = 8
 
     override fun write(value: CheckSpendableResponse, buf: ByteBuffer) {
-        // The Rust code always expects pointers written as 8 bytes,
-        // and will fail to compile if they don't fit.
-        buf.putLong(Pointer.nativeValue(lower(value)))
-    }
-}
-
-
-
-
-public interface ClientInterface {
-    @Throws(CashuSdkException::class)
-    fun `getKeys`(): Keys@Throws(CashuSdkException::class)
-    fun `getKeysets`(): KeySetResponse@Throws(CashuSdkException::class)
-    fun `requestMint`(`amount`: Amount): RequestMintResponse@Throws(CashuSdkException::class)
-    fun `mint`(`blindedMessages`: BlindedMessages, `hash`: String): PostMintResponse@Throws(CashuSdkException::class)
-    fun `checkFees`(`invoice`: Bolt11Invoice): CheckFeesResponse@Throws(CashuSdkException::class)
-    fun `melt`(`proofs`: List<Proof>, `invoice`: Bolt11Invoice, `outputs`: List<BlindedMessage>?): MeltResponse@Throws(CashuSdkException::class)
-    fun `split`(`splitRequest`: SplitRequest): SplitResponse@Throws(CashuSdkException::class)
-    fun `checkSpendable`(`proofs`: List<MintProof>): CheckSpendableResponse@Throws(CashuSdkException::class)
-    fun `getInfo`(): MintInfo
-}
-
-class Client(
-    pointer: Pointer
-) : FFIObject(pointer), ClientInterface {
-    constructor(`mintUrl`: String) :
-        this(
-    rustCallWithError(CashuSdkException) { _status ->
-    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_constructor_client_new(FfiConverterString.lower(`mintUrl`),_status)
-})
-
-    /**
-     * Disconnect the object from the underlying Rust object.
-     *
-     * It can be called more than once, but once called, interacting with the object
-     * causes an `IllegalStateException`.
-     *
-     * Clients **must** call this method once done with the object, or cause a memory leak.
-     */
-    override protected fun freeRustArcPtr() {
-        rustCall() { status ->
-            _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_free_client(this.pointer, status)
-        }
-    }
-
-    
-    @Throws(CashuSdkException::class)override fun `getKeys`(): Keys =
-        callWithPointer {
-    rustCallWithError(CashuSdkException) { _status ->
-    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_method_client_get_keys(it,
-        
-        _status)
-}
-        }.let {
-            FfiConverterTypeKeys.lift(it)
-        }
-    
-    
-    @Throws(CashuSdkException::class)override fun `getKeysets`(): KeySetResponse =
-        callWithPointer {
-    rustCallWithError(CashuSdkException) { _status ->
-    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_method_client_get_keysets(it,
-        
-        _status)
-}
-        }.let {
-            FfiConverterTypeKeySetResponse.lift(it)
-        }
-    
-    
-    @Throws(CashuSdkException::class)override fun `requestMint`(`amount`: Amount): RequestMintResponse =
-        callWithPointer {
-    rustCallWithError(CashuSdkException) { _status ->
-    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_method_client_request_mint(it,
-        FfiConverterTypeAmount.lower(`amount`),
-        _status)
-}
-        }.let {
-            FfiConverterTypeRequestMintResponse.lift(it)
-        }
-    
-    
-    @Throws(CashuSdkException::class)override fun `mint`(`blindedMessages`: BlindedMessages, `hash`: String): PostMintResponse =
-        callWithPointer {
-    rustCallWithError(CashuSdkException) { _status ->
-    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_method_client_mint(it,
-        FfiConverterTypeBlindedMessages.lower(`blindedMessages`),FfiConverterString.lower(`hash`),
-        _status)
-}
-        }.let {
-            FfiConverterTypePostMintResponse.lift(it)
-        }
-    
-    
-    @Throws(CashuSdkException::class)override fun `checkFees`(`invoice`: Bolt11Invoice): CheckFeesResponse =
-        callWithPointer {
-    rustCallWithError(CashuSdkException) { _status ->
-    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_method_client_check_fees(it,
-        FfiConverterTypeBolt11Invoice.lower(`invoice`),
-        _status)
-}
-        }.let {
-            FfiConverterTypeCheckFeesResponse.lift(it)
-        }
-    
-    
-    @Throws(CashuSdkException::class)override fun `melt`(`proofs`: List<Proof>, `invoice`: Bolt11Invoice, `outputs`: List<BlindedMessage>?): MeltResponse =
-        callWithPointer {
-    rustCallWithError(CashuSdkException) { _status ->
-    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_method_client_melt(it,
-        FfiConverterSequenceTypeProof.lower(`proofs`),FfiConverterTypeBolt11Invoice.lower(`invoice`),FfiConverterOptionalSequenceTypeBlindedMessage.lower(`outputs`),
-        _status)
-}
-        }.let {
-            FfiConverterTypeMeltResponse.lift(it)
-        }
-    
-    
-    @Throws(CashuSdkException::class)override fun `split`(`splitRequest`: SplitRequest): SplitResponse =
-        callWithPointer {
-    rustCallWithError(CashuSdkException) { _status ->
-    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_method_client_split(it,
-        FfiConverterTypeSplitRequest.lower(`splitRequest`),
-        _status)
-}
-        }.let {
-            FfiConverterTypeSplitResponse.lift(it)
-        }
-    
-    
-    @Throws(CashuSdkException::class)override fun `checkSpendable`(`proofs`: List<MintProof>): CheckSpendableResponse =
-        callWithPointer {
-    rustCallWithError(CashuSdkException) { _status ->
-    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_method_client_check_spendable(it,
-        FfiConverterSequenceTypeMintProof.lower(`proofs`),
-        _status)
-}
-        }.let {
-            FfiConverterTypeCheckSpendableResponse.lift(it)
-        }
-    
-    
-    @Throws(CashuSdkException::class)override fun `getInfo`(): MintInfo =
-        callWithPointer {
-    rustCallWithError(CashuSdkException) { _status ->
-    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_method_client_get_info(it,
-        
-        _status)
-}
-        }.let {
-            FfiConverterTypeMintInfo.lift(it)
-        }
-    
-    
-
-    
-}
-
-public object FfiConverterTypeClient: FfiConverter<Client, Pointer> {
-    override fun lower(value: Client): Pointer = value.callWithPointer { it }
-
-    override fun lift(value: Pointer): Client {
-        return Client(value)
-    }
-
-    override fun read(buf: ByteBuffer): Client {
-        // The Rust code always writes pointers as 8 bytes, and will
-        // fail to compile if they don't fit.
-        return lift(Pointer(buf.getLong()))
-    }
-
-    override fun allocationSize(value: Client) = 8
-
-    override fun write(value: Client, buf: ByteBuffer) {
         // The Rust code always expects pointers written as 8 bytes,
         // and will fail to compile if they don't fit.
         buf.putLong(Pointer.nativeValue(lower(value)))
@@ -5365,11 +5120,6 @@ public interface WalletInterface {
 class Wallet(
     pointer: Pointer
 ) : FFIObject(pointer), WalletInterface {
-    constructor(`client`: Client, `mintKeys`: Keys) :
-        this(
-    rustCall() { _status ->
-    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_constructor_wallet_new(FfiConverterTypeClient.lower(`client`),FfiConverterTypeKeys.lower(`mintKeys`),_status)
-})
 
     /**
      * Disconnect the object from the underlying Rust object.
@@ -5495,6 +5245,14 @@ class Wallet(
     
     
 
+    companion object {
+        fun `forMint`(`mintUrl`: String): Wallet =
+            Wallet(
+    rustCallWithError(CashuSdkException) { _status ->
+    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_constructor_wallet_for_mint(FfiConverterString.lower(`mintUrl`),_status)
+})
+        
+    }
     
 }
 

@@ -1,9 +1,11 @@
 use std::ops::Deref;
+use std::str::FromStr;
 use std::sync::Arc;
 
 use cashu_ffi::{
-    BlindedMessages, BlindedSignature, Bolt11Invoice, Proof, RequestMintResponse, Token,
+    BlindedMessages, BlindedSignature, Bolt11Invoice, Proof, RequestMintResponse, Token, Url
 };
+use cashu_sdk::client::Client;
 use cashu_sdk::client::minreq_client::HttpClient;
 use cashu_sdk::types::ProofsStatus;
 use cashu_sdk::url::UncheckedUrl;
@@ -31,6 +33,20 @@ impl Wallet {
                 mint_keys.as_ref().deref().clone(),
             ),
         }
+    }
+
+    pub fn for_mint(mint_url: String) -> Result<Self> {
+        let client = HttpClient {};
+        let keys = RUNTIME.block_on(async {
+            client.get_mint_keys(&Url::from_str(&mint_url.as_str()).unwrap()).await
+        })?;
+        Ok(Self {
+            inner: WalletSdk::new(
+                client,
+                UncheckedUrl::new(mint_url),
+                keys,
+            ),
+        })
     }
 
     pub fn check_proofs_spent(&self, proofs: Vec<Arc<MintProof>>) -> Result<Arc<ProofsStatus>> {
