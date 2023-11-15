@@ -22,6 +22,9 @@ impl Id {
             inner: IdSdk::try_from_base64(&id)?,
         })
     }
+    pub fn as_string(&self) -> String {
+        self.inner.to_string()
+    }
 }
 
 impl From<IdSdk> for Id {

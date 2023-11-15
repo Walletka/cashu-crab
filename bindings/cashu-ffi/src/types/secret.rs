@@ -1,5 +1,5 @@
-use std::ops::Deref;
-
+use std::{ops::Deref, str::FromStr};
+use crate::error::Result;
 use cashu::secret::Secret as SecretSdk;
 
 pub struct Secret {
@@ -28,6 +28,12 @@ impl Secret {
 
     pub fn as_bytes(&self) -> Vec<u8> {
         self.inner.as_bytes().to_vec()
+    }
+
+    pub fn from_string(secret: String) -> Result<Self> {
+        Ok(Self {
+            inner: SecretSdk::from_str(&secret).unwrap(),
+        })
     }
 }
 

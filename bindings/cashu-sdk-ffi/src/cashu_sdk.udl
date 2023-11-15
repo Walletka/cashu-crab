@@ -31,12 +31,15 @@ interface Amount {
 interface Secret {
 	constructor();
 	sequence<u8> as_bytes();	
+	[Throws=CashuError, Name=from_string]
+	constructor(string secret);
 };
 
 
 interface Id {
     [Throws=CashuError]
 	constructor(string id);
+	string as_string();
 };
 
 interface PublicKey {

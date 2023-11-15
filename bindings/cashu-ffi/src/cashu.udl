@@ -25,8 +25,11 @@ interface Amount {
 };
 
 interface Secret {
+	[Name = new]
 	constructor();
-	sequence<u8> as_bytes();	
+	sequence<u8> as_bytes();
+	[Throws=CashuError, Name=from_string]
+	constructor(string secret);
 };
 
 // NUT00
@@ -34,6 +37,7 @@ interface Secret {
 interface Id {
     [Throws=CashuError]
 	constructor(string id);
+	string as_string();
 };
 
 interface PublicKey {
