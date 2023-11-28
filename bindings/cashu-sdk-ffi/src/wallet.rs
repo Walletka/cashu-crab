@@ -38,7 +38,7 @@ impl Wallet {
     pub fn for_mint(mint_url: String) -> Result<Self> {
         let client = HttpClient {};
         let keys = RUNTIME.block_on(async {
-            client.get_mint_keys(&Url::from_str(&mint_url.as_str()).unwrap()).await
+            client.get_mint_keys(Url::from_str(&mint_url.as_str()).unwrap()).await
         })?;
         Ok(Self {
             inner: WalletSdk::new(

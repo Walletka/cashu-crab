@@ -394,6 +394,8 @@ internal interface _UniFFILib : Library {
     ): Pointer
     fun uniffi_cashu_sdk_fn_method_secret_as_bytes(`ptr`: Pointer,_uniffi_out_err: RustCallStatus, 
     ): RustBuffer.ByValue
+    fun uniffi_cashu_sdk_fn_method_secret_as_string(`ptr`: Pointer,_uniffi_out_err: RustCallStatus, 
+    ): RustBuffer.ByValue
     fun uniffi_cashu_sdk_fn_free_id(`ptr`: Pointer,_uniffi_out_err: RustCallStatus, 
     ): Unit
     fun uniffi_cashu_sdk_fn_constructor_id_new(`id`: RustBuffer.ByValue,_uniffi_out_err: RustCallStatus, 
@@ -750,6 +752,8 @@ internal interface _UniFFILib : Library {
     ): Short
     fun uniffi_cashu_sdk_checksum_method_secret_as_bytes(
     ): Short
+    fun uniffi_cashu_sdk_checksum_method_secret_as_string(
+    ): Short
     fun uniffi_cashu_sdk_checksum_method_id_as_string(
     ): Short
     fun uniffi_cashu_sdk_checksum_method_publickey_to_hex(
@@ -1055,6 +1059,9 @@ private fun uniffiCheckApiChecksums(lib: _UniFFILib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cashu_sdk_checksum_method_secret_as_bytes() != 35925.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cashu_sdk_checksum_method_secret_as_string() != 54932.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cashu_sdk_checksum_method_id_as_string() != 35839.toShort()) {
@@ -4596,6 +4603,7 @@ public object FfiConverterTypeRequestMintResponse: FfiConverter<RequestMintRespo
 public interface SecretInterface {
     
     fun `asBytes`(): List<UByte>
+    fun `asString`(): String
 }
 
 class Secret(
@@ -4630,6 +4638,17 @@ class Secret(
 }
         }.let {
             FfiConverterSequenceUByte.lift(it)
+        }
+    
+    override fun `asString`(): String =
+        callWithPointer {
+    rustCall() { _status ->
+    _UniFFILib.INSTANCE.uniffi_cashu_sdk_fn_method_secret_as_string(it,
+        
+        _status)
+}
+        }.let {
+            FfiConverterString.lift(it)
         }
     
     

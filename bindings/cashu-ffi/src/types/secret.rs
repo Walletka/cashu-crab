@@ -30,6 +30,10 @@ impl Secret {
         self.inner.as_bytes().to_vec()
     }
 
+    pub fn as_string(&self) -> String {
+        self.inner.to_string()
+    }
+
     pub fn from_string(secret: String) -> Result<Self> {
         Ok(Self {
             inner: SecretSdk::from_str(&secret).unwrap(),

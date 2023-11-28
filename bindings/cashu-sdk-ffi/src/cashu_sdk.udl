@@ -31,6 +31,7 @@ interface Amount {
 interface Secret {
 	constructor();
 	sequence<u8> as_bytes();	
+	string as_string();	
 	[Throws=CashuError, Name=from_string]
 	constructor(string secret);
 };
