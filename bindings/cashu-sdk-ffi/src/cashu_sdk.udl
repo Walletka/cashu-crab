@@ -261,9 +261,9 @@ enum InvoiceStatus {
 };
 
 interface ProofsStatus {
-	constructor(sequence<MintProof> spendable, sequence<MintProof> spent);
-	sequence<MintProof> spendable();
-	sequence<MintProof> spent();
+	constructor(sequence<Proof> spendable, sequence<Proof> spent);
+	sequence<Proof> spendable();
+	sequence<Proof> spent();
 };
 
 

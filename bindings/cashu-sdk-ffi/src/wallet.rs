@@ -15,7 +15,7 @@ use tokio::runtime::Runtime;
 
 use crate::error::Result;
 use crate::types::{Melted, SendProofs};
-use crate::{Amount, Keys, MintProof};
+use crate::{Amount, Keys};
 
 static RUNTIME: Lazy<Runtime> = Lazy::new(|| Runtime::new().expect("Can't start Tokio runtime"));
 
